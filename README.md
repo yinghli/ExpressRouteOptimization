@@ -49,3 +49,19 @@ On Azure side, route 3.3.3.3/32 will have two candidate next hop. One AS-PATH is
 ## From On-prem to Azure route optimization. 
 By default, Microsoft will advertise same IP prefix on each BGP session, customer can setup all BGP attribute at their end to determine which path is preferred. Like Weight, Local Preference, AS-PATH, Community and so on. </br>
 
+In the previous topology, if customer wants to use ER circuit to access 10.1.0.0/16 and use ER circuit2 to access 10.2.0.0/16, they can put 10.1.0.0/16 higher BGP Local Preference attribute in ER circuit and 10.2.0.0/16 higher Local Preference attribute in ER circuit2. </br>
+
+```router bgp 65000
+ bgp log-neighbor-changes
+ neighbor 24.1.1.2 remote-as 12076
+ neighbor 24.1.1.2 route-map ModifyLP in
+!
+ip prefix-list LP seq 5 permit 10.1.0.0/16
+!
+route-map ModifyLP permit 10
+ match ip address prefix-list LP
+ set local-preference 400
+!
+route-map ModifyLP permit 20
+!
+```
