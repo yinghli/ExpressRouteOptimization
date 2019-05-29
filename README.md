@@ -6,7 +6,7 @@ Now Azure support multiple ExpressRoute PoP at same region for site level resili
 
 For example, at Azure Southeast Region, there are two ExpressRoute peering location. One is at Equinix and the other is at GlobalSwitch. </br>
 
-![](https://github.com/yinghli/ExpressRouteOptimization/blob/master/Topology.jpg)
+![](https://github.com/yinghli/ExpressRouteOptimization/blob/master/NewTopology.jpg)
 
 In this topology, customer had VNET at Southeast Asia Region and setup GatewaySubnet and provision an ExpressRoute Gateway. Customer setup ExpressRoute circuit at peering location Singapore and another circuit2 at peering location Singapore2. After that, customer can link ExpressRoute gateway to different circuit for high redundancy. </br>
 
