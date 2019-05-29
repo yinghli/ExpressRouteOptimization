@@ -24,6 +24,7 @@ $connection.RoutingWeight = 100
 Set-AzVirtualNetworkGatewayConnection -VirtualNetworkGatewayConnection $connection
 ```
 Customer can also optimize this by leveraging BGP attribute. Azure support AS-PATH prepending. For private peering, customer can prepend any ASN to influence Azure side route selection. For same IP prefix, shorter AS-PATH will be chosen as preferred path. </br>
+
 In this example, customer will advertise two prefixes to Azure. 3.3.3.3/32 will prepend 64512 and 64513 ASN. 3.3.3.4/32 will be advertised as normal. </br>
 ```
 router bgp 65000
@@ -42,3 +43,5 @@ route-map prependAS permit 10
 route-map prependAS permit 20
 ```
 On Azure effective route table, route 3.3.3.3/32 will have two candidate next hop. One AS-PATH is  <12076, 65000> , the other is <12076, 65000, 64512, 64513>. So route with AS-PATH <12076, 65000> will be chosen. </br>
+
+3.3.3.4/32 have two equal cost next hop, both AS-PATH is <12076, 65000>. </br>
