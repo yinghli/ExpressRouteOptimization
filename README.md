@@ -66,3 +66,20 @@ route-map ModifyLP permit 10
 route-map ModifyLP permit 20
 !
 ```
+For Microsoft peeing, because all prefixes have BGP community attribute, customer can leverage this to achieve PaaS route optimization. For example, customer want to use ER circuit to send storage traffic (Southeast Azure Storage BGP community 12076:52011) and ER circuit2 to send SQL traffic, they can identify related IP prefixes based on BGP community and set Local Preference to choose different path. </br>
+```
+router bgp 65000
+ bgp log-neighbor-changes
+ neighbor 24.1.1.2 remote-as 12076
+ neighbor 24.1.1.2 route-map MatchCom in
+!
+ip bgp-community new-format
+ip community-list standard Comm permit 12076:52011
+!
+route-map MatchCom permit 10
+ match community Comm
+ set local-preference 500
+!
+route-map MatchCom permit 20
+!
+```
