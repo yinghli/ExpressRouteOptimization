@@ -14,7 +14,7 @@ In this design, either physical link down or ExpressRoute site down will not imp
 
 From routing perspective, by default, customer VM effective route table will see each IP prefix have four ECMP next-hop from MSEE. And customer edge router will see each Azure VNET address space route have four next-hop from MSEE. This is because both ExpressRoute circuit have two connection to MSEE and each of them running separate BGP session with customer edge router and ExpressRoute gateway. Each MSEE will use BGP ASN 12076 to setup BGP neighbor. </br>
 
-# From Azure to On-prem route optimization. 
+## From Azure to On-prem route optimization. 
 Longest prefix match is always working. If customer advertise 10.0.0.0/24 to ER circuit1 and advertise 10.0.0.0/23 to ER circut2. For packet destination is 10.0.0.1, Azure will choose 10.0.0.0/24 next hop as longest prefix match. </br>
 
 On Azure side, customer can adjust each ER connection BGP weight on ExpressRoute gateway. Higher weight ER connection will be chosen as preferred path. This will influence traffic from Azure to On-Prem direction. </br>
@@ -42,6 +42,10 @@ route-map prependAS permit 10
 !
 route-map prependAS permit 20
 ```
-On Azure effective route table, route 3.3.3.3/32 will have two candidate next hop. One AS-PATH is  <12076, 65000> , the other is <12076, 65000, 64512, 64513>. So route with AS-PATH <12076, 65000> will be chosen. </br>
+On Azure side, route 3.3.3.3/32 will have two candidate next hop. One AS-PATH is  <12076, 65000> , the other is <12076, 65000, 64512, 64513>. So route with AS-PATH <12076, 65000> will be chosen. </br>
 
 3.3.3.4/32 have two equal cost next hop, both AS-PATH is <12076, 65000>. </br>
+
+## From On-prem route optimization. 
+By default, Microsoft will advertise same IP prefix on each BGP session, customer can setup all BGP attribute at their end to determine which path is preferred. Like Weight, Local Preference, AS-PATH, Community and so on. </br>
+
