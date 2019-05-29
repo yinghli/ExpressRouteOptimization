@@ -41,3 +41,4 @@ route-map prependAS permit 10
 !
 route-map prependAS permit 20
 ```
+On Azure effective route table, route 3.3.3.3/32 will have two candidate next hop. One AS-PATH is  <12076, 65000> , the other is <12076, 65000, 64512, 64513>. So route with AS-PATH <12076, 65000> will be chosen. </br>
