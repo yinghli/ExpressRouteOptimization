@@ -51,7 +51,8 @@ By default, Microsoft will advertise same IP prefix on each BGP session, custome
 
 In the previous topology, if customer wants to use ER circuit to access 10.1.0.0/16 and use ER circuit2 to access 10.2.0.0/16, they can put 10.1.0.0/16 higher BGP Local Preference attribute in ER circuit and 10.2.0.0/16 higher Local Preference attribute in ER circuit2. </br>
 
-```router bgp 65000
+```
+router bgp 65000
  bgp log-neighbor-changes
  neighbor 24.1.1.2 remote-as 12076
  neighbor 24.1.1.2 route-map ModifyLP in
