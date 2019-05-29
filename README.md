@@ -46,6 +46,6 @@ On Azure side, route 3.3.3.3/32 will have two candidate next hop. One AS-PATH is
 
 3.3.3.4/32 have two equal cost next hop, both AS-PATH is <12076, 65000>. </br>
 
-## From On-prem route optimization. 
+## From On-prem to Azure route optimization. 
 By default, Microsoft will advertise same IP prefix on each BGP session, customer can setup all BGP attribute at their end to determine which path is preferred. Like Weight, Local Preference, AS-PATH, Community and so on. </br>
 
