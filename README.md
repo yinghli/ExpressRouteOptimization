@@ -1,6 +1,6 @@
 ## ExpressRouteOptimization
 
-Azure have doc to discuss how to optimize route, pleae check ![here](https://docs.microsoft.com/en-us/azure/expressroute/expressroute-optimize-routing)
+Azure have doc to discuss how to optimize route, pleae check [here](https://docs.microsoft.com/en-us/azure/expressroute/expressroute-optimize-routing)
 
 Now Azure support multiple ExpressRoute PoP at same region for site level resilience and support multiple ExpressRoute Circuit connect to same VNET from same location. Customers is considering below topology for HA. </br>
 
